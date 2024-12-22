@@ -1,170 +1,224 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
-
+/* 7CPPZYeOj0liPzqX */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
-}
-
-html {
-  font-size: 62.5%;
   box-sizing: border-box;
 }
-
 body {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 400;
-  height: 100vh;
-  color: #333;
-  background-image: linear-gradient(to top left, #753682 0%, #bf2e34 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: #292524;
+  color: #fafaf9;
+  font-family: "Sono", sans-serif;
+  padding: 48px 64px;
+}
+.hidden {
+  display: none !important;
+}
+/* MAIN LAYOUT */
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
 }
 
-/* LAYOUT */
-main {
-  position: relative;
-  width: 100rem;
-  height: 60rem;
-  background-color: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(200px);
-  filter: blur();
-  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.25);
-  border-radius: 9px;
-  overflow: hidden;
+.header {
+  margin-bottom: 40px;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.player {
-  flex: 50%;
-  padding: 9rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: all 0.75s;
+.main {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 48px;
+}
+
+@media (max-width: 900px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ELEMENTS */
-.name {
-  position: relative;
-  font-size: 4rem;
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo img {
+  width: 68px;
+  height: 68px;
+}
+
+h1 {
+  font-size: 42px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  word-spacing: 2px;
-  font-weight: 300;
-  margin-bottom: 1rem;
+  font-family: "Coiny", sans-serif;
+  line-height: 1;
+  margin-top: 6px;
 }
 
-.score {
-  font-size: 8rem;
-  font-weight: 300;
-  color: #c7365f;
-  margin-bottom: auto;
+.category {
+  margin-bottom: 16px;
 }
 
-.player--active {
-  background-color: rgba(255, 255, 255, 0.4);
-}
-.player--active .name {
-  font-weight: 700;
-}
-.player--active .score {
-  font-weight: 400;
+.fact {
+  font-size: 20px;
+  line-height: 1.4;
+  background-color: #44403c;
+  margin-bottom: 16px;
+  padding: 16px 24px;
+  letter-spacing: -1px;
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
 
-.player--active .current {
-  opacity: 1;
+@media (max-width: 1200px) {
+  .fact {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
 }
 
-.current {
-  background-color: #c7365f;
-  opacity: 0.8;
-  border-radius: 9px;
-  color: #fff;
-  width: 65%;
-  padding: 2rem;
-  text-align: center;
-  transition: all 0.75s;
-}
-
-.current-label {
+.tag {
   text-transform: uppercase;
-  margin-bottom: 1rem;
-  font-size: 1.7rem;
-  color: #ddd;
+  font-size: 14px;
+  font-family: "Coiny", sans-serif;
+  padding-top: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 100px;
 }
 
-.current-score {
-  font-size: 3.5rem;
+.vote-buttons {
+  margin-left: auto;
+  flex-shrink: 0;
+
+  display: flex;
+  gap: 8px;
 }
 
-/* ABSOLUTE POSITIONED ELEMENTS */
-.btn {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #444;
-  background: none;
+.vote-buttons button {
   border: none;
+  background-color: #78716c;
+  font-size: 18px;
+  padding: 6px 12px;
+  border-radius: 100px;
+  color: inherit;
   font-family: inherit;
-  font-size: 1.8rem;
-  text-transform: uppercase;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: 400;
-  transition: all 0.2s;
-
-  background-color: white;
-  background-color: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(10px);
-
-  padding: 0.7rem 2.5rem;
-  border-radius: 50rem;
-  box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
 }
 
-.btn::first-letter {
-  font-size: 2.4rem;
-  display: inline-block;
-  margin-right: 0.7rem;
+.vote-buttons button:hover {
+  background-color: #292524;
 }
 
-.btn--new {
-  top: 4rem;
-}
-.btn--roll {
-  top: 39.3rem;
-}
-.btn--hold {
-  top: 46.1rem;
+ul {
+  list-style: none;
 }
 
-.btn:active {
-  transform: translate(-50%, 3px);
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+.source:link,
+.source:visited {
+  color: #a8a29e;
+  text-decoration: none;
+  margin-left: 12px;
+  transition: 0.3s;
 }
 
-.btn:focus {
-  outline: none;
+.source:hover,
+.source:active {
+  color: #3b82f6;
 }
 
-.dice {
-  position: absolute;
-  left: 50%;
-  top: 16.5rem;
-  transform: translateX(-50%);
-  height: 10rem;
-  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2);
+.btn {
+  border: none;
+  font-family: "Coiny", sans-serif;
+  line-height: 1;
+  text-transform: uppercase;
+  font-size: 17px;
+  padding: 16px 0 13px;
+  background-image: linear-gradient(135deg, #3b82f6, #ef4444, #16a34a, #eab308);
+  color: inherit;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.player--winner {
-  background-color: #2f2f2f;
+.btn:hover {
+  transform: scale(110%) rotate(-2deg);
 }
 
-.player--winner .name {
-  font-weight: 700;
-  color: #c7365f;
+.btn-large {
+  font-size: 20px;
+  padding: 20px 32px 17px;
 }
-.hidden{
-  display: none;
+
+.btn-all-categories {
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.btn-category {
+  width: 100%;
+  background-image: none;
+}
+
+/* FORM */
+.fact-form {
+  background-color: #44403c;
+  margin-bottom: 40px;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-radius: 16px;
+}
+
+.fact-form input,
+.fact-form select {
+  width: 220px;
+  background-color: #78716c;
+  border: none;
+  border-radius: 100px;
+  padding: 16px;
+  font-size: 18px;
+  color: inherit;
+  font-family: inherit;
+}
+
+.fact-form input::placeholder {
+  color: #a8a29e;
+}
+
+.fact-form input:first-child {
+  flex-grow: 1;
+}
+
+.fact-form span {
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 18px;
+}
+
+@media (max-width: 1000px) {
+  body {
+    padding: 32px 48px;
+  }
+
+  .fact-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fact-form input,
+  .fact-form select {
+    width: auto;
+  }
 }

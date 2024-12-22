@@ -1,73 +1,48 @@
-'use strict';
-const player0El = document.querySelector('.player--0');
-const player1El = document.querySelector('.player--1');
-
-const score0El = document.querySelector('#score--0');
-const score1El = document.getElementById('score--1');
-const current0El = document.getElementById('current--0');
-const current1El = document.getElementById('current--1');
-const diceEl = document.querySelector('.dice');
-const btnNew = document.querySelector('.btn--new');
-const btnRoll = document.querySelector('.btn--roll');
-const btnHold = document.querySelector('.btn--hold');
-
-let score , currentScore , activePlayer , playing ;
-
-const init =function(){
-    score = [0,0] ;
-    currentScore = 0 ;
-    activePlayer = 0 ;
-    playing = true ;
-    score0El.textContent =0;
-    score1El.textContent =0;
-    current0El.textContent = 0;
-    current1El.textContent = 0;
-    diceEl.classList.add('hidden');
-    player0El.classList.remove('player--winner');
-    player1El.classList.remove('player--winner');
-    player0El.classList.add('player--active');
-    player1El.classList.remove('player--active');
-}
-init();
-
-
-
-const switchPlayer =function(){
-    document.getElementById(`current--${activePlayer}`).textContent = 0 ;
-    currentScore =0 ;
-    activePlayer = activePlayer === 0 ? 1 : 0 ;
-    player0El.classList.toggle('player--active');
-    player1El.classList.toggle('player--active');
+const btn = document.querySelector(".btn-close");
+const form = document.querySelector(".fact-form");
+const factsList = document.querySelector(".fact-list");
+function datalist(datafetch) {
+  const array = datafetch.map(
+    (facts) => `<li class='fact'><p>${facts.text}
+                
+                <a
+                  class="source"
+                  href="${facts.source}"
+                  target="_blank"
+                  >(Source)</a
+                >
+              </p>
+              <span class="tag" style="background-color: #3b82f6"
+                >technology</span
+              >
+              </li>`
+  );
+  const html = array.join("");
+  factsList.insertAdjacentHTML("afterbegin", html);
 }
 
-
-btnRoll.addEventListener('click', function(){
-    if(playing){
-    const dice = Math.trunc(Math.random()*6)+1 ;
-    
-    diceEl.classList.remove('hidden');
-    diceEl.src =`dice-${dice}.png`;
-    
-    if(dice !== 1){
-        currentScore+=dice ;
-        document.getElementById(`current--${activePlayer}`).textContent = currentScore ;
-    }else{
-        switchPlayer();
+async function loadfacts() {
+  const res = await fetch(
+    "https://wvkjuedxubeoccjmzsap.supabase.co/rest/v1/facts",
+    {
+      headers: {
+        apikey:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind2a2p1ZWR4dWJlb2Njam16c2FwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjkzNTA3MjAsImV4cCI6MjA0NDkyNjcyMH0.-CCKLIj3E8ISvj4z9thB4IlyTTHKIoTNLMjph1NUsnA",
+        authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind2a2p1ZWR4dWJlb2Njam16c2FwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjkzNTA3MjAsImV4cCI6MjA0NDkyNjcyMH0.-CCKLIj3E8ISvj4z9thB4IlyTTHKIoTNLMjph1NUsnA",
+      },
     }
+  );
+  const data = await res.json();
+  datalist(data);
 }
+loadfacts();
+btn.addEventListener("click", function () {
+  if (form.classList.contains("hidden")) {
+    form.classList.remove("hidden");
+    btn.textContent = "close";
+  } else {
+    form.classList.add("hidden");
+    btn.textContent = "Share a fact";
+  }
 });
-btnHold.addEventListener('click',function(){
-    if(playing){
-    score[activePlayer] += currentScore ;
-    document.getElementById(`score--${activePlayer}`).textContent = score[activePlayer];
-    if(score[activePlayer] >=20){
-        playing=false;
-        document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
-        document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
-    }else{
-        switchPlayer();
-    }
-}
-});
-
-btnNew.addEventListener('click',init);

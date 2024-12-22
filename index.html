@@ -2,35 +2,90 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Pig Game</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Coiny&family=Sono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="style.css" rel="stylesheet" />
+    <title>Today I Learned!</title>
   </head>
   <body>
-    <main>
-      <section class="player player--0 player--active">
-        <h2 class="name" id="name--0">Player 1</h2>
-        <p class="score" id="score--0">43</p>
-        <div class="current">
-          <p class="current-label">Current</p>
-          <p class="current-score" id="current--0">0</p>
+    <div class="container">
+      <header class="header">
+        <div class="logo">
+          <img
+            src="logo.png"
+            height="68"
+            width="68"
+            alt="Today I Learned Logo"
+          />
+          <h1>Today I Learned</h1>
         </div>
-      </section>
-      <section class="player player--1">
-        <h2 class="name" id="name--1">Player 2</h2>
-        <p class="score" id="score--1">24</p>
-        <div class="current">
-          <p class="current-label">Current</p>
-          <p class="current-score" id="current--1">0</p>
-        </div>
-      </section>
 
-      <img src="dice-5.png" alt="Playing dice" class="dice" />
-      <button class="btn btn--new">🔄 New game</button>
-      <button class="btn btn--roll">🎲 Roll dice</button>
-      <button class="btn btn--hold">📥 Hold</button>
-    </main>
-    <script src="script.js"></script>
+        <button class="btn btn-large btn-close">Share a fact</button>
+      </header>
+
+      <form class="fact-form hidden">
+        <input type="text" placeholder="Share a fact with the world..." />
+        <span>200</span>
+        <input type="text" placeholder="Trustworthy source..." />
+        <select>
+          <option value="">Choose category:</option>
+          <option value="technology">Technology</option>
+          <option value="science">Science</option>
+          <option value="finance">Finance</option>
+        </select>
+        <button class="btn btn-large">Post</button>
+      </form>
+
+      <main class="main">
+        <aside>
+          <ul>
+            <li class="category">
+              <button class="btn btn-all-categories">All</button>
+            </li>
+            <li class="category">
+              <button
+                class="btn btn-category"
+                style="background-color: #3b82f6"
+              >
+                Technology
+              </button>
+            </li>
+            <li class="category">
+              <button
+                class="btn btn-category"
+                style="background-color: #16a34a"
+              >
+                Science
+              </button>
+            </li>
+          </ul>
+        </aside>
+
+        <section>
+          <ul class="fact-list">
+            <!-- <li class="fact">
+              <p>
+                <a class="source" href="" target="_blank">(Source)</a>
+              </p>
+              <span class="tag" style="background-color: #3b82f6"></span>
+              <div class="vote-buttons">
+                <button>👍 24</button>
+                <button>🤯 9</button>
+                <button>⛔️ 4</button>
+              </div>
+            </li> -->
+          </ul>
+        </section>
+      </main>
+    </div>
   </body>
+  <script src="./script.js"></script>
 </html>
